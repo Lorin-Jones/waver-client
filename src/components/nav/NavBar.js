@@ -9,7 +9,7 @@ export const NavBar = () => {
                 <Link className="nav-link" to="/gear">Gear</Link>
             </li>
             <li className="navbar__item">
-                Navigation link
+                <Link className="nav-link" to="/users">Users</Link>            
             </li>
             <li className="navbar__item">
                 Navigation link

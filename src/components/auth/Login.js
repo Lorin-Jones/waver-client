@@ -10,6 +10,8 @@ export const Login = () => {
     const invalidDialog = useRef()
     const navigate = useNavigate()
 
+    
+
     const handleLogin = (e) => {
         e.preventDefault()
         const user = {
@@ -19,7 +21,7 @@ export const Login = () => {
         loginUser(user)
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
-                    localStorage.setItem("lu_token", res.token)
+                    localStorage.setItem("lu_token", JSON.stringify(res))
                     navigate("/")
                 }
                 else {
@@ -36,11 +38,11 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
+                    <h1>Waver</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputUsername"> Username address </label>
-                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
+                        <label htmlFor="inputUsername"> Username </label>
+                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
