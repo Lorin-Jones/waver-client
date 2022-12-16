@@ -1,6 +1,7 @@
 // JSON.parse(localStorage.getItem("lu_token")).is_staff
 
-import { getToken } from "../utils/authorizations"
+import { getToken } from "../utils/getToken"
+
 
 export const getGear = () => {
     return fetch("http://localhost:8000/gear", {

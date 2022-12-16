@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getSingleGear } from "../../managers/GearManager"
-import { createReview, getReviews } from "../../managers/ReviewManager"
+import { createReview, deleteReview, getReviews } from "../../managers/ReviewManager"
+import { isStaff } from "../../utils/isStaff"
 
 export const GearDetails = () => {
     const { gearId } = useParams()
@@ -16,14 +17,14 @@ export const GearDetails = () => {
         () => {
             getSingleGear(gearId).then(setDetails)
         },
-        [gearId]
+        []
     )
 
     useEffect(
         () => {
             getReviews(gearId).then(setGearReviews)
         },
-        [gearId]
+        []
     )
 
     const submitReview = (evt) => {
@@ -42,6 +43,17 @@ export const GearDetails = () => {
             <div>MSRP: {details.price}</div>
             <div>{details?.gear_type?.name}</div>
             <div>Released {details?.release_date}</div>
+            <h3>Specs</h3>
+            {
+                details?.specifications?.map(
+                    (specification) => {
+                       return <div className="specification">{specification.description}</div>
+                    }
+                )
+            }
+        
+            
+            <h3>Reviews</h3>
             <button onClick={() => setShowForm(!showForm)}>Submit a Review</button>
             {
                 showForm
@@ -71,9 +83,22 @@ export const GearDetails = () => {
             }
             {
                 gearReviews.map(
-                    gearReview => 
+                    gearReview => {
+                        return <>
+                            <div>{gearReview?.waver_user.user.username} says {gearReview?.review}</div>
+                            {
+                                isStaff()
+                                ?
+                                <button onClick={(evt)=>{
+                                    evt.preventDefault()
+                                    deleteReview(gearReview.id).then(window.location.reload())}}>Delete Review</button>
+                                :
+                                ""
+                            }
+                        </>
+                        
+                    }
                     
-                    <div>{gearReview?.waver_user.user.username} says {gearReview?.review}</div>
 
                 )
                 

@@ -1,4 +1,4 @@
-import { getToken } from "../utils/authorizations"
+import { getToken } from "../utils/getToken"
 
 export const getReviews = (gearId) => {
     return fetch(`http://localhost:8000/reviews?gear=${gearId}`, {
@@ -21,4 +21,14 @@ export const createReview = (reviewObject) => {
         body: JSON.stringify(reviewObject)
     })
         .then(res => res.json())
+}
+
+export const deleteReview = (reviewId) => {
+    return fetch(`http://localhost:8000/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${getToken()}`
+        }
+    })
 }

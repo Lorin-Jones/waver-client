@@ -1,4 +1,5 @@
-import { getToken } from "../utils/authorizations"
+import { getToken } from "../utils/getToken"
+
 
 
 export const getWaverUsers = () => {
@@ -20,3 +21,4 @@ export const deleteUser = (userId) => {
         }
     })
 }
+

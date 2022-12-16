@@ -6,7 +6,16 @@ import {getGearTypes, getManufacturers, getSingleGear, updateGear } from '../../
 
 export const GearEdit = () => {
     const navigate = useNavigate()
-    const [gear, setGear] = useState({})
+    const [gear, setGear] = useState({
+        name: "",
+        image: "",
+        price: 0,
+        description: "",
+        releaseDate: "",
+        manufacturerId: 0,
+        gearTypeId: 0,
+        specifications: []
+    })
     const [gearTypes, setGearTypes] = useState([])
     const [manufacturers, setManufacturers] = useState([])
     let {gearId} = useParams()
@@ -34,7 +43,19 @@ export const GearEdit = () => {
         }
 
     useEffect(() => {
-        getSingleGear(gearId).then(singleGearData => setGear(singleGearData))
+        getSingleGear(gearId).then(singleGearData => {
+            const convertedGear = {
+                name: singleGearData['name'],
+                image: singleGearData['image'],
+                price: singleGearData['price'],
+                description: singleGearData['description'],
+                releaseDate: singleGearData['release_date'],
+                manufacturerId: singleGearData['manufacturer'],
+                gearTypeId: singleGearData['gear_type'],
+                specifications: []
+            }
+            setGear(singleGearData)})
+        
     }, [])
 
     useEffect(() => {
@@ -110,7 +131,7 @@ export const GearEdit = () => {
                     onChange={changeGearState}
                     name="manufacturer"
                     required autoFocus>
-                    <option value="0">Manufacturer</option>
+                    <option value={gear?.manufacturerId}>{gear?.manufacturer?.name}</option>
                     {manufacturers.map(
                         (manufacturer) => {
                             return <option className="form-option" value={`${manufacturer.id}`}>{manufacturer.name}</option>

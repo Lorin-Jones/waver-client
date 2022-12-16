@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getGear, deleteGear, getGearTypes, getGearByType } from "../../managers/GearManager.js"
-import { isStaff } from "../../utils/authorizations.js"
+import { isStaff } from "../../utils/isStaff.js"
 
 
 
