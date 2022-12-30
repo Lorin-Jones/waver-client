@@ -78,11 +78,46 @@ export const getManufacturers = () => {
 }
 
 export const getGearByType = (gearTypeId) => {
-    return fetch(`http://localhost:8000/gear?gear_type=${gearTypeId}`, {
+    return fetch(`http://localhost:8000/gear?gear_types=${gearTypeId}`, {
         headers:{
             "Content-Type": "application/json",
             "Authorization": `Token ${getToken()}`
         }
      })
         .then(response => response.json())
+}
+
+export const getGearBySearch = (search) => {
+    return fetch(`http://localhost:8000/gear?name=${search}`, {
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${getToken()}`
+        }
+     })
+        .then(response => response.json())
+}
+
+
+export const createGearType = (gearType) => {
+    return fetch("http://localhost:8000/gear_type", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${getToken()}`
+        },
+        body: JSON.stringify(gearType)
+     })
+        
+}
+
+export const createManufacturer = (manufacturer) => {
+    return fetch("http://localhost:8000/manufacturers", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${getToken()}`
+        },
+        body: JSON.stringify(manufacturer)
+     })
+        
 }

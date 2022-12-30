@@ -1,30 +1,30 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from 'react-router-dom'
-import {getGearTypes, getManufacturers, getSingleGear, updateGear } from '../../managers/GearManager.js'
+import {createGearType, getGearTypes, getManufacturers, getSingleGear, updateGear, createManufacturer } from '../../managers/GearManager.js'
 
 
 export const GearEdit = () => {
     const navigate = useNavigate()
-    const [gear, setGear] = useState({
+    const [gear, setGear] = useState([])
+    const [newGear, setNewGear] = useState({
         name: "",
         image: "",
         price: 0,
-        description: "",
-        releaseDate: "",
-        manufacturerId: 0,
-        gearTypeId: 0,
-        specifications: []
+        description: ""
+        
     })
     const [gearTypes, setGearTypes] = useState([])
     const [manufacturers, setManufacturers] = useState([])
+    const [showTypeEdit, setShowTypeEdit] = useState(false)
+    const [showManufacturerEdit, setManufacturerEdit] = useState(false)
+    const [newGearType, setNewGearType] = useState({
+        name: ""
+    })
+    const [newManufacturer, setNewManufacturer] = useState({
+        name: ""
+    })
     let {gearId} = useParams()
-
-    /*
-        Since the input fields are bound to the values of
-        the properties of this state variable, you need to
-        provide some default values.
-    */
 
     
     const showWidget = (clickEvent) => {
@@ -50,11 +50,11 @@ export const GearEdit = () => {
                 price: singleGearData['price'],
                 description: singleGearData['description'],
                 releaseDate: singleGearData['release_date'],
-                manufacturerId: singleGearData['manufacturer'],
-                gearTypeId: singleGearData['gear_type'],
-                specifications: []
+                manufacturerId: singleGearData['manufacturer']['id'],
+                gearTypeId: singleGearData['gear_type']['id'],
+                
             }
-            setGear(singleGearData)})
+            setGear(convertedGear)})
         
     }, [])
 
@@ -72,6 +72,17 @@ export const GearEdit = () => {
         setGear(copy)
         // TODO: Complete the onChange function
 
+    }
+
+
+    const submitNewCategory = (evt) => {
+        evt.preventDefault()
+        createGearType(newGearType).then(() => getGearTypes().then(gearTypeData => setGearTypes(gearTypeData)).then(setShowTypeEdit(false)))
+    }
+
+    const submitNewManufacterer = (evt) => {
+        evt.preventDefault()
+        createManufacturer(newManufacturer).then(() => getManufacturers().then(manufacturerData => setManufacturers(manufacturerData)).then(setManufacturerEdit(false)))
     }
 
     return (
@@ -116,22 +127,23 @@ export const GearEdit = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="release_date">Released: </label>
-                    <input type="date" name="release_date" required autoFocus className="form-control"
-                        value={gear.releaseDate}
+                    <label htmlFor="releaseDate">Released: </label>
+                    <input type="number" min="1964" name="releaseDate" required autoFocus className="form-control" 
+                        value={gear?.releaseDate}
                         onChange={changeGearState}
                     />
                 </div>
             </fieldset>
             <fieldset>
                 <div>
-                    <label htmlFor="manufacturer"></label>
+                    <label htmlFor="manufacturerId"></label>
                     <select
+                    value={gear?.manufacturerId}
                     className="form_select"
                     onChange={changeGearState}
-                    name="manufacturer"
+                    name="manufacturerId"
                     required autoFocus>
-                    <option value={gear?.manufacturerId}>{gear?.manufacturer?.name}</option>
+                    <option value="0">Select Manufacturer</option>
                     {manufacturers.map(
                         (manufacturer) => {
                             return <option className="form-option" value={`${manufacturer.id}`}>{manufacturer.name}</option>
@@ -140,16 +152,41 @@ export const GearEdit = () => {
                     }
                     </select>
                 </div>
+                <button onClick={evt => {
+                    evt.preventDefault();
+                    Promise.resolve().then(() => setManufacturerEdit(!showManufacturerEdit));
+                    }}>Add Manufacturer</button>
+                    {
+                        showManufacturerEdit
+                        ?
+                        <>
+                            <div className="form-group">
+                                <input type="text" name="name" required autoFocus className="form-control"
+                                    value={newManufacturer.name}
+                                    onChange={(evt) => {
+                                        const copy = {...newManufacturer}
+                                        copy.name = evt.target.value
+                                        setNewManufacturer(copy)
+                                    }}/>
+                            </div>
+                            <button onClick={submitNewManufacterer} className="btn btn-primary">
+                                Save Manufacturer
+                            </button>
+                        </>
+                            :
+                            ""
+                        }
 
 
             </fieldset>
             <fieldset>
                 <div>
-                    <label htmlFor="gear-type"></label>
+                    <label htmlFor="gearTypeId"></label>
                     <select
+                    value={gear?.gearTypeId}
                     className="form_select"
                     onChange={changeGearState}
-                    name="gear_type"
+                    name="gearTypeId"
                     required autoFocus>
                     <option value="0">Gear Type</option>
                     {gearTypes.map(
@@ -160,6 +197,30 @@ export const GearEdit = () => {
                     }
                     </select>
                 </div>
+                <button onClick={evt => {
+                    evt.preventDefault();
+                    Promise.resolve().then(() => setShowTypeEdit(!showTypeEdit));
+                    }}>Add Category</button>
+                {
+                    showTypeEdit
+                    ?
+                    <>
+                    <div className="form-group">
+                        <input type="text" name="name" required autoFocus className="form-control"
+                            value={newGearType.name}
+                            onChange={(evt) => {
+                                const copy = {...newGearType}
+                                copy.name = evt.target.value
+                                setNewGearType(copy)
+                            }}/>
+                    </div>
+                    <button onClick={submitNewCategory} className="btn btn-primary">
+                        Save Category
+                    </button>
+                    </>
+                    :
+                    ""
+                }
 
 
             </fieldset>
@@ -171,13 +232,13 @@ export const GearEdit = () => {
                     evt.preventDefault()
 
                     const updatedGear = {
-                        name: gear.name,
-                        image: gear.image,
-                        price: parseInt(gear.price),
-                        description: gear.description,
-                        release_date: parseInt(gear.release_date),
-                        manufacturer: parseInt(gear.manufacturer),
-                        gear_type: parseInt(gear.gear_type)
+                        name: newGear.name,
+                        image: newGear.image,
+                        price: parseInt(newGear.price),
+                        description: newGear.description,
+                        release_date: parseInt(newGear.release_date),
+                        manufacturer: parseInt(newGear.manufacturer),
+                        gear_type: parseInt(newGear.gear_type)
                     }
 
                     // Send POST request to your API
