@@ -5,6 +5,7 @@ export const NavBar = () => {
     const navigate = useNavigate()
     return (
         <ul className="navbar">
+            <h1 className="mainHeader">Waver</h1>
             <li className="nav-item">
                 <Link className="nav-link" to="/gear">Gear</Link>
             </li>

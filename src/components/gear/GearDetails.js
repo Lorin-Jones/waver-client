@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getSingleGear } from "../../managers/GearManager"
 import { createReview, deleteReview, getReviews } from "../../managers/ReviewManager"
 import { isStaff } from "../../utils/isStaff"
+import "./gear.css"
 
 export const GearDetails = () => {
     const { gearId } = useParams()
@@ -42,96 +43,110 @@ export const GearDetails = () => {
         updateReview(copy)
     }
 
-    return <>
-            <div className="gearDetailHeader">
-                <h2>{details?.specifications?.manufacturer?.name} {details?.name}</h2>
-            </div> 
-            <img src={details?.image}></img>
-            <div className="gearPrice">${details.price}</div>
-            <div className="gearRating">Rating: {details.average_rating}</div>
-            <div className="gearDescription">{details?.description}</div>
+    return <article className="gearDetailPage">
+                <section className="gearDetailSection">
+                    <div className="gearPrimary">
+                        <div className="gearDetailHeader">
+                            <h2>{details?.specifications?.manufacturer?.name} {details?.name}</h2>
+                        </div> 
+                        <img src={details?.image}></img>
+                        <div className="gearPrice">${details.price}</div>
+                        <div className="gearRating">Rating: {details.average_rating}</div>
+                    </div>
+                    <div className="gearDescription">
+                        <h3 className="header">About This Item</h3>
+                        <div className="gearDescriptionText">{details?.description}</div>
+                    </div>
+                    <div className="gearSpecs">
+                        <h3>Specs</h3>
+                            
+                            <>
+                                <div>{details?.specifications?.gear_types?.name && <div>{details.specifications.gear_types.name}</div>}</div>
+                                <div>{details?.specifications?.release_date && <div>Released {details.specifications.release_date}</div>}</div>
+                                <div>{details?.specifications?.number_of_keys && <div>{details.specifications.number_of_keys}</div>}</div>
+                                <div>{details?.specifications?.voices && <div>{details.specifications.voices}</div>}</div>
+                                <div>{details?.specifications?.arpeggiator && <div>Arpeggiator {details.specifications.arpeggiator}</div>}</div>
+                                <div>{details?.specifications?.sequencer && <div>Sequencer {details.specifications.sequencer}</div>}</div>
+                                <div>{details?.specifications?.velocity && <div>Velocity {details.specifications.velocity}</div>}</div>
+                                <div>{details?.specifications?.aftertouch && <div>Aftertouch {details.specifications.aftertouch}</div>}</div>
+                            </>
+                    </div>
+                </section>
+                
 
-            <h3>Specs</h3>
-                
-                <>
-                    <div>{details?.specifications?.gear_types?.name && <div>{details.specifications.gear_types.name}</div>}</div>
-                    <div>{details?.specifications?.release_date && <div>Released {details.specifications.release_date}</div>}</div>
-                    <div>{details?.specifications?.number_of_keys && <div>{details.specifications.number_of_keys}</div>}</div>
-                    <div>{details?.specifications?.voices && <div>{details.specifications.voices}</div>}</div>
-                    <div>{details?.specifications?.arpeggiator && <div>Arpeggiator {details.specifications.arpeggiator}</div>}</div>
-                    <div>{details?.specifications?.sequencer && <div>Sequencer {details.specifications.sequencer}</div>}</div>
-                    <div>{details?.specifications?.velocity && <div>Velocity {details.specifications.velocity}</div>}</div>
-                    <div>{details?.specifications?.aftertouch && <div>Aftertouch {details.specifications.aftertouch}</div>}</div>
-                </>
-                
-                    
-                
-            
-            <h3>Reviews</h3>
-            <button onClick={() => setShowForm(!showForm)}>Submit a Review</button>
-            {
-                showForm
-                ?
-                <form className="gearForm">
+                <section className="gearReviews">
+                    <h3>Reviews</h3>
+                    <button onClick={() => setShowForm(!showForm)}>Submit a Review</button>
+                    {
+                        showForm
+                        ?
+                        <form className="gearForm">
 
-                    <fieldset>
-                        <div className="form-group">
-                            <label htmlFor="title">Write your review:</label>
-                            <textarea
-                                rows={65}
-                                onChange={changeStateProperty}
-                                required autoFocus
-                                id="review"
-                                className="form-control"
-                            ></textarea>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <div>
-                            <label htmlFor="rating">Rate this Gear</label>
-                            <input
-                                min = "1"
-                                max = "10"
-                                onChange={changeStateProperty}
-                                required autoFocus
-                                type="number" id="rating"
-                                className="form-control"
-                                placeholder="rating"
-                            />
-                        </div>
-                    </fieldset>
-                <button onClick={submitReview} className="btn btn-primary">
-                    Save Review
-                </button>
-                </form>
-                :
-                ""
-            }
-            {
-                details?.reviews?.map(
-                    gearReview => {
-                        return <>
-                            <div>{gearReview?.waver_user?.user?.username}</div>
-                            <div>{gearReview?.review}</div>
-                            <div>{gearReview?.rating}</div>
-                            {
-                                isStaff()
-                                ?
-                                <button onClick={(evt)=>{
-                                    evt.preventDefault()
-                                    deleteReview(gearReview?.id).then(window.location.reload())}}>Delete Review</button>
-                                :
-                                ""
+                            <fieldset>
+                                <div className="form-group">
+                                    <label htmlFor="title">Write your review:</label>
+                                    <textarea
+                                        rows={65}
+                                        onChange={changeStateProperty}
+                                        required autoFocus
+                                        id="review"
+                                        className="form-control"
+                                    ></textarea>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div>
+                                    <label htmlFor="rating">Rate this Gear</label>
+                                    <input
+                                        min = "1"
+                                        max = "10"
+                                        onChange={changeStateProperty}
+                                        required autoFocus
+                                        type="number" id="rating"
+                                        className="form-control"
+                                        placeholder="rating"
+                                    />
+                                </div>
+                            </fieldset>
+                        <button onClick={submitReview} className="btn btn-primary">
+                            Save Review
+                        </button>
+                        </form>
+                        :
+                        ""
+                    }
+                    {
+                        details?.reviews?.map(
+                            gearReview => {
+                                return <>
+                                    <div>{gearReview?.waver_user?.user?.username}</div>
+                                    <div>{gearReview?.review}</div>
+                                    <div>{gearReview?.rating}</div>
+                                    {
+                                        isStaff()
+                                        ?
+                                        <button onClick={(evt)=>{
+                                            evt.preventDefault()
+                                            deleteReview(gearReview?.id).then(window.location.reload())}}>Delete Review</button>
+                                        :
+                                        ""
+                                    }
+                                </>
+                                
                             }
-                        </>
+                            
+
+                        )
                         
                     }
-                    
-
-                )
-                
-            }
-
-    </>
-    
+                </section>
+    </article>
 }
+
+
+    
+                        
+
+
+                    
+            
