@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { getAllPosts } from "../../managers/PostManager.js"
+import { deletePost, getAllPosts } from "../../managers/PostManager.js"
 import { isStaff } from "../../utils/isStaff.js"
+import "./posts.css"
 
 
 
@@ -34,10 +35,21 @@ export const PostList = (props) => {
             {
                 allPosts.map(post => {
                     return <section key={`post--${post.id}`} className="post">
+                                <a href={`posts/${post.id}`} className="card-img-actions">
+                                    <img src={post.image} className="card-img img-fluid" width="96" height="350" alt="" />
+                                </a>
+                                <a href={`posts/${post.id}`} className="card-img-actions">
+                                    <h2 class="card-img img-fluid" width="96" height="350" alt="">{post.title}</h2>
+                                </a>
+                                <div>By {post.user.full_name}</div>
+                                {
+                                    isStaff()
+                                    ?
+                                    <button onClick={() => deletePost(post.id)}>Delete</button> 
+                                    :
+                                    ""
+                                }
                         
-                        <Link to={`${post.id}`} className="post__title">
-                            <img src={post.image} />
-                            <h2>{post.title}</h2></Link>
                     </section>
                 })
             }

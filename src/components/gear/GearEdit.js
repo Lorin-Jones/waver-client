@@ -49,9 +49,15 @@ export const GearEdit = () => {
                 image: singleGearData['image'],
                 price: singleGearData['price'],
                 description: singleGearData['description'],
-                releaseDate: singleGearData['release_date'],
-                manufacturerId: singleGearData['manufacturer']['id'],
-                gearTypeId: singleGearData['gear_type']['id'],
+                releaseDate: singleGearData['specifications']['release_date'],
+                numberOfKeys: singleGearData['specifications']['number_of_keys'],
+                voices: singleGearData['specifications']['voices'],
+                arpeggiator: singleGearData['specifications']['arpeggiator'],
+                sequencer: singleGearData['specifications']['sequencer'],
+                velocity: singleGearData['specifications']['velocity'],
+                aftertouch: singleGearData['specifications']['aftertouch'],
+                manufacturerId: singleGearData['specifications']['manufacturer']['id'],
+                gearTypeId: singleGearData['specifications']['gear_types']['id'],
                 
             }
             setGear(convertedGear)})
@@ -72,6 +78,16 @@ export const GearEdit = () => {
         setGear(copy)
         // TODO: Complete the onChange function
 
+    }
+
+    const isChecked = (domEvent) => {
+        const newGear = Object.assign({}, gear)
+        if (domEvent.target.checked === true) {
+            newGear[domEvent.target.name] = true
+        } else {
+            newGear[domEvent.target.name] = false
+        }
+        setGear(newGear)
     }
 
 
@@ -135,6 +151,42 @@ export const GearEdit = () => {
                 </div>
             </fieldset>
             <fieldset>
+                <div className="form-group">
+                    <label htmlFor="numberOfKeys">Number of Keys</label>
+                    <input type="text" name="numberOfKeys" required autoFocus className="form-control"
+                        value={gear.numberOfKeys}
+                        onChange={changeGearState}
+                    />    
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="voices">Voices</label>
+                    <input type="text" name="voices" required autoFocus className="form-control"
+                        value={gear.voices}
+                        onChange={changeGearState}
+                    />    
+                </div>
+            </fieldset>
+            <fieldset>
+                <label htmlFor="arpeggiator">Arpeggiator</label>
+                <input type="checkbox" name="arpeggiator" value={gear.arpeggiator} checked={gear.arpeggiator} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="sequencer">Sequencer</label>
+                <input type="checkbox" name="sequencer" value={gear.sequencer} checked={gear.sequencer} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="velocity">Velocity</label>
+                <input type="checkbox" name="velocity" value={gear.velocity} checked={gear.velocity} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="aftertouch">Aftertouch</label>
+                <input type="checkbox" name="aftertouch" value={gear.aftertouch} checked={gear.aftertouch} required autoFocus
+                    onChange={isChecked}
+                    />
+            </fieldset>
+            <fieldset>
                 <div>
                     <label htmlFor="manufacturerId"></label>
                     <select
@@ -176,7 +228,7 @@ export const GearEdit = () => {
                             :
                             ""
                         }
-
+                
 
             </fieldset>
             <fieldset>
@@ -236,9 +288,15 @@ export const GearEdit = () => {
                         image: newGear.image,
                         price: parseInt(newGear.price),
                         description: newGear.description,
-                        release_date: parseInt(newGear.release_date),
-                        manufacturer: parseInt(newGear.manufacturer),
-                        gear_type: parseInt(newGear.gear_type)
+                        release_date: parseInt(newGear.releaseDate),
+                        number_of_keys: newGear.numberOfKeys,
+                        voices: newGear.voices,
+                        arpeggiator: newGear.arpeggiator,
+                        sequencer: newGear.sequencer,
+                        velocity: newGear.velocity,
+                        aftertouch: newGear.aftertouch,
+                        manufacturer: parseInt(newGear.manufacturerId),
+                        gear_types: parseInt(newGear.gearTypeId)
                     }
 
                     // Send POST request to your API

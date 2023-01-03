@@ -22,6 +22,12 @@ export const GearForm = () => {
        price: 0,
        description: "",
        releaseDate: "",
+       numberOfKeys: "",
+       voices: "",
+       arpeggiator: false,
+       sequencer: false,
+       velocity: false,
+       aftertouch: false,
        manufacturerId: 0,
        gearTypeId: 0
     })
@@ -55,6 +61,17 @@ export const GearForm = () => {
 
     }
 
+    const isChecked = (domEvent) => {
+        const newGear = Object.assign({}, currentGear)
+        if (domEvent.target.checked === true) {
+            newGear[domEvent.target.name] = true
+        } else {
+            newGear[domEvent.target.name] = false
+        }
+        setCurrentGear(newGear)
+    }
+
+
     return (
         <form className="gearForm">
             <h2 className="gearForm__title">Register New Gear</h2>
@@ -68,6 +85,7 @@ export const GearForm = () => {
                 </div>
             </fieldset>
             <fieldset>
+                <img src={currentGear.image} className="gearImage" />
                 <button
                     onClick={(clickEvent) => showWidget(clickEvent)}
                     className="btn btn-primary">
@@ -95,11 +113,47 @@ export const GearForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="release_date">Released: </label>
-                    <input type="date" name="releaseDate" required autoFocus className="form-control"
+                    <input type="number" min="1964" name="releaseDate" required autoFocus className="form-control"
                         value={currentGear.releaseDate}
                         onChange={changeGearState}
                     />
                 </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="numberOfKeys">Number of Keys</label>
+                    <input type="text" name="numberOfKeys" required autoFocus className="form-control"
+                        value={currentGear.numberOfKeys}
+                        onChange={changeGearState}
+                    />    
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="voices">Voices</label>
+                    <input type="text" name="voices" required autoFocus className="form-control"
+                        value={currentGear.voices}
+                        onChange={changeGearState}
+                    />    
+                </div>
+            </fieldset>
+            <fieldset>
+                <label htmlFor="arpeggiator">Arpeggiator</label>
+                <input type="checkbox" name="arpeggiator" value={currentGear.arpeggiator} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="sequencer">Sequencer</label>
+                <input type="checkbox" name="sequencer" value={currentGear.sequencer} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="velocity">Velocity</label>
+                <input type="checkbox" name="velocity" value={currentGear.velocity} required autoFocus
+                    onChange={isChecked}
+                    />
+                <label htmlFor="aftertouch">Aftertouch</label>
+                <input type="checkbox" name="aftertouch" value={currentGear.aftertouch} required autoFocus
+                    onChange={isChecked}
+                    />
             </fieldset>
             <fieldset>
                 <div>
@@ -154,8 +208,14 @@ export const GearForm = () => {
                         price: parseInt(currentGear.price),
                         description: currentGear.description,
                         release_date: parseInt(currentGear.releaseDate),
+                        number_of_keys: currentGear.numberOfKeys,
+                        voices: currentGear.voices,
+                        arpeggiator: currentGear.arpeggiator,
+                        sequencer: currentGear.sequencer,
+                        velocity: currentGear.velocity,
+                        aftertouch: currentGear.aftertouch,
                         manufacturer: parseInt(currentGear.manufacturerId),
-                        gear_type: parseInt(currentGear.gearTypeId)
+                        gear_types: parseInt(currentGear.gearTypeId)
                     }
 
                     // Send POST request to your API

@@ -95,7 +95,6 @@ export const GearList = (props) => {
             </section>
             <section class="gearGrid">
 
-                <section class="mainGrid">
                     <div class="row">
                         {
                             gear.map(gearItem => {
@@ -142,7 +141,6 @@ export const GearList = (props) => {
                             })
                         }
                     </div>
-                </section>
             </section>
         </article>
     )

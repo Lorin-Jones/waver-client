@@ -1,4 +1,4 @@
-.gearDetailPage {
+/* .gearDetailPage {
     
     font-family: 'Poppins', sans-serif;
 }
@@ -26,11 +26,11 @@
 }
 
 .gearGrid {
-    display: flex; 
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    
+} */
 
 body {
     margin: 0;
@@ -40,8 +40,8 @@ body {
     line-height: 1.5385;
     color: #333;
     text-align: left;
-    background-color: #2196F3;
 }
+
 .mt-50{
 
     margin-top: 50px;

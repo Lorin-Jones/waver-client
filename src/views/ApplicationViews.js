@@ -12,6 +12,7 @@ import { UsedGearDetails } from "../components/used/usedGearDetails"
 import { UsedGearForm } from "../components/used/UsedGearForm"
 import { PostList } from "../components/posts/Posts"
 import { PostDetails } from "../components/posts/PostDetails"
+import { PostForm } from "../components/posts/PostForm"
 
 
 export const ApplicationViews = () => {
@@ -30,6 +31,8 @@ export const ApplicationViews = () => {
                 <Route path="/used_gear/new" element={<UsedGearForm />} />
                 <Route path="/posts" element={<PostList />} />
                 <Route path="/posts/:postId" element={<PostDetails />} />
+                <Route path="/posts/new" element={<PostForm />} />
+
 
 
 
