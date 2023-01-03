@@ -11,9 +11,17 @@ export const GearEdit = () => {
         name: "",
         image: "",
         price: 0,
-        description: ""
-        
+        description: "",
+        releaseDate: 0,
+        numberOfKeys: "",
+        voices: "",
+        arpeggiator: gear.arpeggiator,
+        sequencer: gear.sequencer,
+        velocity: gear.velocity,
+        aftertouch: gear.aftertouch
+
     })
+    
     const [gearTypes, setGearTypes] = useState([])
     const [manufacturers, setManufacturers] = useState([])
     const [showTypeEdit, setShowTypeEdit] = useState(false)
@@ -284,19 +292,19 @@ export const GearEdit = () => {
                     evt.preventDefault()
 
                     const updatedGear = {
-                        name: newGear.name,
-                        image: newGear.image,
-                        price: parseInt(newGear.price),
-                        description: newGear.description,
-                        release_date: parseInt(newGear.releaseDate),
-                        number_of_keys: newGear.numberOfKeys,
-                        voices: newGear.voices,
-                        arpeggiator: newGear.arpeggiator,
-                        sequencer: newGear.sequencer,
-                        velocity: newGear.velocity,
-                        aftertouch: newGear.aftertouch,
-                        manufacturer: parseInt(newGear.manufacturerId),
-                        gear_types: parseInt(newGear.gearTypeId)
+                        name: gear.name,
+                        image: gear.image,
+                        price: parseInt(gear.price),
+                        description: gear.description,
+                        release_date: parseInt(gear.releaseDate),
+                        number_of_keys: gear.numberOfKeys,
+                        voices: gear.voices,
+                        arpeggiator: gear.arpeggiator,
+                        sequencer: gear.sequencer,
+                        velocity: gear.velocity,
+                        aftertouch: gear.aftertouch,
+                        manufacturer: parseInt(gear.manufacturerId),
+                        gear_types: parseInt(gear.gearTypeId)
                     }
 
                     // Send POST request to your API
