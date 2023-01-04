@@ -7,20 +7,7 @@ import {createGearType, getGearTypes, getManufacturers, getSingleGear, updateGea
 export const GearEdit = () => {
     const navigate = useNavigate()
     const [gear, setGear] = useState([])
-    const [newGear, setNewGear] = useState({
-        name: "",
-        image: "",
-        price: 0,
-        description: "",
-        releaseDate: 0,
-        numberOfKeys: "",
-        voices: "",
-        arpeggiator: gear.arpeggiator,
-        sequencer: gear.sequencer,
-        velocity: gear.velocity,
-        aftertouch: gear.aftertouch
-
-    })
+    
     
     const [gearTypes, setGearTypes] = useState([])
     const [manufacturers, setManufacturers] = useState([])

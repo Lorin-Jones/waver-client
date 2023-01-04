@@ -1,5 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
+import { isStaff } from "../../utils/isStaff"
+import { isUser } from "../../utils/isUser"
 import "./NavBar.css"
+
+const userId = isUser()
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -15,6 +19,18 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="nav-link" to="/used_gear">Used</Link> 
             </li>
+            <li className="navbar__item">
+                <Link className="nav-link" to={`/users/${userId}`}>My Page</Link> 
+            </li>
+            
+            {
+                isStaff()
+                ?
+                <li className="navbar__item">
+                    <Link className="nav-link" to="/users">Users</Link> 
+                </li>
+                : ""
+            }
             {
                 (localStorage.getItem("lu_token") !== null) ?
                     <li className="nav-item">
