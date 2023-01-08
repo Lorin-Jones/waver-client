@@ -76,7 +76,7 @@ export const Register = () => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputBio"> Bio </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other users know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"

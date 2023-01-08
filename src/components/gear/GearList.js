@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getGear, deleteGear, getGearTypes, getGearByType, getGearBySearch } from "../../managers/GearManager.js"
 import { isStaff } from "../../utils/isStaff.js"
+import "./gear.css"
 
 
 
@@ -93,12 +94,12 @@ export const GearList = (props) => {
                     </>
                 }
             </section>
-            <section class="gearGrid">
+            <section class="container-fluid">
 
                     <div class="row">
                         {
                             gear.map(gearItem => {
-                                return <section key={`gear--${gearItem.id}`} className="col-md-4 mt-2">
+                                return <section key={`gear--${gearItem.id}`} className="col-sm-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <a href={`gear/${gearItem.id}`} className="card-img-actions">
@@ -121,12 +122,12 @@ export const GearList = (props) => {
                                                 isStaff()
                                                 ?
                                                 <>
-                                                    <button className="button"
+                                                    <button type="button" class="btn btn-dark"
                                                         onClick={() => {
                                                             navigate({ pathname: `/gearUpdate/${gearItem.id}` })
                                                         }}
                                                         >Edit</button>
-                                                    <button className="button"
+                                                    <button type="button" class="btn btn-dark"
                                                         onClick={() => { deleteGear(gearItem.id).then(window.location.reload()) }}
                                                         >Delete</button>
                                                 

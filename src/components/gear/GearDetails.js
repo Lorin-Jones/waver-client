@@ -45,11 +45,13 @@ export const GearDetails = () => {
 
     return <article className="gearDetailPage">
                 <section className="gearDetailSection">
-                    <div className="gearPrimary">
+                    <div class="jumbotron text-center">
+                        <div class="image-container">
+                            <img src={details?.image}></img>
+                        </div>
                         <div className="gearDetailHeader">
-                            <h2>{details?.specifications?.manufacturer?.name} {details?.name}</h2>
+                            <h2 class="header">{details?.specifications?.manufacturer?.name} {details?.name}</h2>
                         </div> 
-                        <img src={details?.image}></img>
                         <div className="gearPrice">${details.price}</div>
                         <div className="gearRating">Rating: {details.average_rating}</div>
                     </div>
@@ -58,20 +60,21 @@ export const GearDetails = () => {
                         <div className="gearDescriptionText">{details?.description}</div>
                     </div>
                     <div className="gearSpecs">
-                        <h3>Specs</h3>
+                        <h3 className="header">Specs</h3>
                             
                             <>
-                                <div>{details?.specifications?.gear_types?.name && <div>{details.specifications.gear_types.name}</div>}</div>
-                                <div>{details?.specifications?.release_date && <div>Released {details.specifications.release_date}</div>}</div>
-                                <div>{details?.specifications?.number_of_keys && <div>{details.specifications.number_of_keys}</div>}</div>
-                                <div>{details?.specifications?.voices && <div>{details.specifications.voices}</div>}</div>
-                                <div>{details?.specifications?.arpeggiator && <div>Arpeggiator {details.specifications.arpeggiator}</div>}</div>
-                                <div>{details?.specifications?.sequencer && <div>Sequencer {details.specifications.sequencer}</div>}</div>
-                                <div>{details?.specifications?.velocity && <div>Velocity {details.specifications.velocity}</div>}</div>
-                                <div>{details?.specifications?.aftertouch && <div>Aftertouch {details.specifications.aftertouch}</div>}</div>
+                                <div id="specs">{details?.specifications?.gear_types?.name && <div>{details.specifications.gear_types.name}</div>}</div>
+                                <div id="specs">{details?.specifications?.release_date && <div>Released {details.specifications.release_date}</div>}</div>
+                                <div id="specs">{details?.specifications?.number_of_keys && <div>{details.specifications.number_of_keys}</div>}</div>
+                                <div id="specs">{details?.specifications?.voices && <div>{details.specifications.voices}</div>}</div>
+                                <div id="specs">{details?.specifications?.arpeggiator && <div>Arpeggiator {details.specifications.arpeggiator}</div>}</div>
+                                <div id="specs">{details?.specifications?.sequencer && <div>Sequencer {details.specifications.sequencer}</div>}</div>
+                                <div id="specs">{details?.specifications?.velocity && <div>Velocity {details.specifications.velocity}</div>}</div>
+                                <div id="specs">{details?.specifications?.aftertouch && <div>Aftertouch {details.specifications.aftertouch}</div>}</div>
                             </>
                     </div>
                 </section>
+                            
                 
 
                 <section className="gearReviews">
