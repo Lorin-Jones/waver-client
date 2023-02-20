@@ -32,7 +32,7 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res && "is_staff" in res) {
                         localStorage.setItem("lu_token", JSON.stringify(res))
-                        navigate("/")
+                        navigate("/gear")
                     }
                 })
         } else {

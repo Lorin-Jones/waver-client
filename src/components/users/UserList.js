@@ -18,6 +18,7 @@ export const UserList = () => {
             user: waverUser.user,
             bio: waverUser.bio,
             username: waverUser.username,
+            image: waverUser.image,
             first_name: waverUser.first_name,
             last_name: waverUser.last_name,
             email: waverUser.email,
@@ -52,6 +53,7 @@ export const UserList = () => {
                                     const updatedUser = {
                                         user: waverUser.user,
                                         bio: waverUser.bio,
+                                        image: waverUser.image,
                                         username: waverUser.username,
                                         first_name: waverUser.first_name,
                                         last_name: waverUser.last_name,
@@ -72,6 +74,7 @@ export const UserList = () => {
                                         user: waverUser.user,
                                         bio: waverUser.bio,
                                         username: waverUser.username,
+                                        image: waverUser.image,
                                         first_name: waverUser.first_name,
                                         last_name: waverUser.last_name,
                                         email: waverUser.email,

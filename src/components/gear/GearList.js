@@ -99,22 +99,22 @@ export const GearList = (props) => {
                     <div class="row">
                         {
                             gear.map(gearItem => {
-                                return <section key={`gear--${gearItem.id}`} className="col-sm-4">
+                                return <section key={`gear--${gearItem.id}`} class="col-md-6 col-lg-4">
                                     <div class="card">
-                                        <div class="card-body">
-                                            <a href={`gear/${gearItem.id}`} className="card-img-actions">
-                                                <img src={gearItem.image} class="card-img img-fluid" width="96" height="350" alt="" />
+                    
+                                            <a href={`gear/${gearItem.id}`} class="card-img-actions">
+                                                <img src={gearItem.image} class="card-img img-fluid" alt="" />
                                             </a>
-                                        </div>
+                                    
                                     </div>
-                                    <div class="card-body bg-light text-center">
-                                        <div class="mb-2">
-                                            <h6 class="font-weight-semibold mb-2">
-                                                <a href={`gear/${gearItem.id}`} className="text-default mb-2" data-abc="true">
+                                    <div class="card-body">
+                                        
+                                            <h6 class="card-title">
+                                                <a href={`gear/${gearItem.id}`}>
                                                     {gearItem.specifications.manufacturer.name} {gearItem.name}</a>
                                             </h6>
-                                            <div class="text-muted" data-abc="true">{gearItem?.specifications?.gear_types?.name}</div>
-                                        </div>
+                                            <div class="card-text">{gearItem?.specifications?.gear_types?.name}</div>
+                                        
 
                                             <h3 className="mb-0 font-weight-semibold">${gearItem.price}</h3>
 
@@ -122,12 +122,12 @@ export const GearList = (props) => {
                                                 isStaff()
                                                 ?
                                                 <>
-                                                    <button type="button" class="btn btn-dark"
+                                                    <button type="button" 
                                                         onClick={() => {
                                                             navigate({ pathname: `/gearUpdate/${gearItem.id}` })
                                                         }}
                                                         >Edit</button>
-                                                    <button type="button" class="btn btn-dark"
+                                                    <button type="button"
                                                         onClick={() => { deleteGear(gearItem.id).then(window.location.reload()) }}
                                                         >Delete</button>
                                                 

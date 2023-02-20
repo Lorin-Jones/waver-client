@@ -1,0 +1,38 @@
+.usedGearDetailPage {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%
+}
+
+.image-container {
+    object-fit: fill;
+}
+
+img {
+    width: 100%;
+    height: auto
+}
+.gearDetailPage {
+    margin-top: 3rem;
+}
+.gearDetailHeader {
+    text-align: center;
+    font-size: 2rem;
+}
+
+#specs {
+    font-weight: 350;
+}
+
+.gearSpecs {
+    margin-top: 1rem;
+}
+
+.gearDescription {
+    margin-top: 1rem;
+}
+
+.header {
+    margin-top: 1rem;
+}
+

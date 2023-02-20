@@ -9,12 +9,6 @@ export const GearForm = () => {
     const [gearTypes, setGearTypes] = useState([])
     const [manufacturers, setManufacturers] = useState([])
 
-    /*
-        Since the input fields are bound to the values of
-        the properties of this state variable, you need to
-        provide some default values.
-    */
-
    
     const [currentGear, setCurrentGear] = useState({
        name: "",

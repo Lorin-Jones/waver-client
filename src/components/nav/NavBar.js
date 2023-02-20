@@ -9,8 +9,11 @@ export const NavBar = () => {
     const navigate = useNavigate()
     return ( <>
     
-    <h1 className="mainHeader">Waver</h1>
     <ul className="navbar">
+
+        <li>
+            <h1 className="mainHeader">Waver</h1>
+        </li>
         <li className="navbar__item">
             <Link className="nav-link" to="/gear">Gear</Link>
         </li>
@@ -20,9 +23,7 @@ export const NavBar = () => {
         <li className="navbar__item">
             <Link className="nav-link" to="/used_gear">Used</Link> 
         </li>
-        <li className="navbar__item">
-            <Link className="nav-link" to={`/users/${userId}`}>My Page</Link> 
-        </li>
+        
         
         {
             isStaff()

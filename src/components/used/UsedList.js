@@ -1,3 +1,4 @@
+import { Button } from "bootstrap"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getUsedGear, deleteUsedGear } from "../../managers/UsedManager.js"
@@ -44,19 +45,41 @@ export const UsedGearList = (props) => {
 
                 }
 
-            
-            {
-                used_gear.map(gearItem => {
-                    return <section key={`gear--${gearItem.id}`} className="gear">
+            <section className="container-fluid">   
+                <div class="row">
+                    {
+                        used_gear.map(gearItem => {
+                            return <section key={`gear--${gearItem.id}`} className="col-sm-4">
+                                        <div class="card h-200">
+                                            <div class="card-body">
+                                                <div id={`used/${gearItem.id}`} className="used__title">
+                                                    <img src={gearItem.image} class="card-img img-fluid" width="96" height="350" alt=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body bg-light text-center">
+                                            <div class="mb-2">
+                                                <h6 class="font-weight-semibold mb-2">
+                                                    <div id={`used/${gearItem.id}`} className="text-default mb-2" data-abc="true">
+                                                    {gearItem.item}</div>
+                                                </h6>
+
+                                            </div>
+                                        </div>
+                                                    
+                                                <h3 className="mb-0 font-weight-semibold">{gearItem.price}</h3>
+                                                <div className="gear__user">Seller: {gearItem.waver_user.user.username}</div>
+                                                <button>Message Seller</button>
+
+                                    </section>
+                            
                         
-                        <Link to={`${gearItem.id}`} className="gear__title">
-                            <img src={gearItem.image} />
-                            {gearItem.item} </Link>
-                        <div className="gear__price">{gearItem.price}</div>
-                        <div className="gear__user">{gearItem.waver_user.user.username}</div>
-                    </section>
-                })
-            }
+                        })
+                    }
+
+                </div>
+
+            </section>
         </article>
     )
 }

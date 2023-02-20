@@ -14,6 +14,7 @@ import { PostList } from "../components/posts/Posts"
 import { PostDetails } from "../components/posts/PostDetails"
 import { PostForm } from "../components/posts/PostForm"
 import { UserPage } from "../components/users/UserPage"
+import { PostEdit } from "../components/posts/PostEdit"
 
 
 export const ApplicationViews = () => {
@@ -34,6 +35,8 @@ export const ApplicationViews = () => {
                 <Route path="/posts/:postId" element={<PostDetails />} />
                 <Route path="/posts/new" element={<PostForm />} />
                 <Route path="/users/:userId" element={<UserPage />} />
+                <Route path="/postUpdate/:postId" element={<PostEdit />} />
+
 
 
 

@@ -124,7 +124,7 @@ export const GearDetails = () => {
                                 return <>
                                     <div>{gearReview?.waver_user?.user?.username}</div>
                                     <div>{gearReview?.review}</div>
-                                    <div>{gearReview?.rating}</div>
+                                    <div>Customer Rating: {gearReview?.rating}</div>
                                     {
                                         isStaff()
                                         ?

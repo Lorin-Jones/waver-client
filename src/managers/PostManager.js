@@ -42,3 +42,15 @@ export const createPost = (post) => {
      })
         
 }
+
+export const updatePost = (post, postId) => {
+    return fetch(`http://localhost:8000/posts/${postId}`, {
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${getToken()}`
+        },
+        body: JSON.stringify(post)
+     })
+        
+}

@@ -22,7 +22,7 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("lu_token", JSON.stringify(res))
-                    navigate("/")
+                    navigate("/gear")
                 }
                 else {
                     invalidDialog.current.showModal()

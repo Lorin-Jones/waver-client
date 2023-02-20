@@ -4,13 +4,15 @@
     width: 50%
 }
 
-.image-container {
+
+.jumbotron {
     object-fit: fill;
 }
 
 img {
     width: 100%;
     height: auto
+    
 }
 .gearDetailPage {
     margin-top: 3rem;
