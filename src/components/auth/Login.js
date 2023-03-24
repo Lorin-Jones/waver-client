@@ -46,12 +46,12 @@ export const Login = () => {
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
+                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required autoFocus />
                     </fieldset>
                     <fieldset style={{
                         textAlign: "center"
                     }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
+                        <button type="submit">Sign In</button>
                     </fieldset>
                 </form>
             </section>

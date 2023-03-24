@@ -2,6 +2,14 @@
     font-size: 2.5rem;
 }
 
+body {
+    background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
 fieldset {
     min-width: 0;
     padding: 1rem 0;
@@ -11,7 +19,8 @@ fieldset {
 
 .form--login {
     display: inline-block;
-    margin: 0 auto;
+    max-width: 80%;
+    border-radius: 10px;
     text-align: left;
 }
 
@@ -27,7 +36,7 @@ fieldset {
 
 .form-control {
     display: block;
-    width: 94%;
+    width: 80%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;

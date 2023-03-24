@@ -15,6 +15,7 @@ import { PostDetails } from "../components/posts/PostDetails"
 import { PostForm } from "../components/posts/PostForm"
 import { UserPage } from "../components/users/UserPage"
 import { PostEdit } from "../components/posts/PostEdit"
+import { NavBar } from "../components/nav/NavBar"
 
 
 export const ApplicationViews = () => {
