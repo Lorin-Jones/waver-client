@@ -1,155 +1,149 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { getSingleGear } from "../../managers/GearManager"
-import { createReview, deleteReview, getReviews } from "../../managers/ReviewManager"
-import { isStaff } from "../../utils/isStaff"
-import "./gear.css"
-
-export const GearDetails = () => {
-    const { gearId } = useParams()
-    const [details, setDetails] = useState({})
-    const [showForm, setShowForm] = useState(false)
-    const [newReview, updateReview] = useState({
-        gear: gearId,
-        review: "",
-        rating: 0
-    })
-
-    const navigate = useNavigate()
-
-    useEffect(
-        () => {
-            getSingleGear(gearId).then(setDetails)
-        },
-        []
-    )
+// import React, { useEffect, useState } from "react"
+// import { Link, useNavigate } from "react-router-dom"
+// import { getGear, deleteGear, getGearTypes, getGearByType, getGearBySearch } from "../../managers/GearManager.js"
+// import { isStaff } from "../../utils/isStaff.js"
+// import "./gear.css"
 
 
-    const submitReview = (evt) => {
-        evt.preventDefault()
 
-        const reviewToSend = {
-            gear: newReview.gear,
-            review: newReview.review,
-            rating: parseInt(newReview.rating)
-        }
+// export const GearDetails = (props) => {
+//     const [ gear, setGear ] = useState([])
+//     const [gearTypes, setGearTypes] = useState([])
+//     const [filtered, setFiltered] = useState()
+//     const [searchInput, setSearchInput] = useState("")
 
-        createReview(reviewToSend).then(() => window.location.reload())
-    }
-    
-    const changeStateProperty = (evt) => {
-        const copy = { ...newReview }
-        copy[evt.target.id] = evt.target.value
-        updateReview(copy)
-    }
+//     const navigate = useNavigate()
 
-    return <article className="gearDetailPage">
-                <section className="gearDetailSection">
-                    <div class="jumbotron text-center">
-                        <div class="image-container">
-                            <img src={details?.image}></img>
-                        </div>
-                        <div className="gearDetailHeader">
-                            <h2 class="header">{details?.specifications?.manufacturer?.name} {details?.name}</h2>
-                        </div> 
-                        <div className="gearPrice">${details.price}</div>
-                        <div className="gearRating">Rating: {details.average_rating}</div>
-                    </div>
-                    <div className="gearDescription">
-                        <h3 className="header">About This Item</h3>
-                        <div className="gearDescriptionText">{details?.description}</div>
-                    </div>
-                    <div className="gearSpecs">
-                        <h3 className="header">Specs</h3>
+//     useEffect(() => {
+//         if (filtered !== 0 && filtered !== undefined) {
+//             getGearByType(filtered).then(data => setGear(data))
+//         } else if (filtered === undefined || filtered === 0) {
+//             getGear().then(data => setGear(data))
+//         }
+//     }, [filtered])
+
+//     useEffect(() => {
+//         getGearTypes().then(data => setGearTypes(data))
+//     }, [])
+
+//     document.addEventListener(
+//         "change",
+//         (event) => {
+//             if (event.target.value !== 0) {
+//                 setFiltered(parseInt(event.target.value))
+//             }
+//         }
+//     )
+
+//     const handleChange = (e) => {
+//         e.preventDefault();
+//         setSearchInput(e.target.value);
+//       }
+
+//     return (
+//         <article className="gear">
+//             <section className="gearHeader">
+
+//                 <h2 className="header">Gear</h2>
+//                     {
+//                         isStaff()
+//                         ?
+//                         <button className="button"
+//                             onClick={() => {
+//                                 navigate({ pathname: "/gear/new" })
+//                             }}
+//                         >Register New Gear</button>
+//                         :
+//                         ""
+
+//                     }
+//                 {   
+//                     <>
+//                     <section className="gearSearch">
+//                         <select id="gear_type">
+//                             <option value="0" name="gear_type">Browse By Gear Type</option>
+//                             {
+//                                 gearTypes.map(
+//                                     (gearType) => {
+//                                     return <option name="gear_type" value={gearType.id}>{gearType.name}</option>
+//                                     }
+//                                 )
+//                             }
                             
-                            <>
-                                <div id="specs">{details?.specifications?.gear_types?.name && <div>{details.specifications.gear_types.name}</div>}</div>
-                                <div id="specs">{details?.specifications?.release_date && <div>Released {details.specifications.release_date}</div>}</div>
-                                <div id="specs">{details?.specifications?.number_of_keys && <div>{details.specifications.number_of_keys}</div>}</div>
-                                <div id="specs">{details?.specifications?.voices && <div>{details.specifications.voices}</div>}</div>
-                                <div id="specs">{details?.specifications?.arpeggiator && <div>Arpeggiator {details.specifications.arpeggiator}</div>}</div>
-                                <div id="specs">{details?.specifications?.sequencer && <div>Sequencer {details.specifications.sequencer}</div>}</div>
-                                <div id="specs">{details?.specifications?.velocity && <div>Velocity {details.specifications.velocity}</div>}</div>
-                                <div id="specs">{details?.specifications?.aftertouch && <div>Aftertouch {details.specifications.aftertouch}</div>}</div>
-                            </>
-                    </div>
-                </section>
-                            
-                
+//                         </select>
+//                         <input
+//                             type="text"
+//                             placeholder="Search here"
+//                             onChange={handleChange}
+//                             value={searchInput} />
+//                             <button className="button"
+//                                         onClick={(evt) => {
+//                                             evt.preventDefault(); 
+//                                             getGearBySearch(searchInput)
+//                                             .then(data => setGear(data))}}
+//                                         >Search</button>
+//                         <button className="button"
+//                                         onClick={(evt) => {
+//                                             evt.preventDefault(); 
+//                                             window.location.reload()}}
+//                                         >All Gear</button>
 
-                <section className="gearReviews">
-                    <h3>Reviews</h3>
-                    <button onClick={() => setShowForm(!showForm)}>Submit a Review</button>
-                    {
-                        showForm
-                        ?
-                        <form className="gearForm">
+//                     </section>
 
-                            <fieldset>
-                                <div className="form-group">
-                                    <label htmlFor="title">Write your review:</label>
-                                    <textarea
-                                        rows={65}
-                                        onChange={changeStateProperty}
-                                        required autoFocus
-                                        id="review"
-                                        className="form-control"
-                                    ></textarea>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div>
-                                    <label htmlFor="rating">Rate this Gear</label>
-                                    <input
-                                        min = "1"
-                                        max = "10"
-                                        onChange={changeStateProperty}
-                                        required autoFocus
-                                        type="number" id="rating"
-                                        className="form-control"
-                                        placeholder="rating"
-                                    />
-                                </div>
-                            </fieldset>
-                        <button onClick={submitReview} className="btn btn-primary">
-                            Save Review
-                        </button>
-                        </form>
-                        :
-                        ""
-                    }
-                    {
-                        details?.reviews?.map(
-                            gearReview => {
-                                return <>
-                                    <div>{gearReview?.waver_user?.user?.username}</div>
-                                    <div>{gearReview?.review}</div>
-                                    <div>Customer Rating: {gearReview?.rating}</div>
-                                    {
-                                        isStaff()
-                                        ?
-                                        <button onClick={(evt)=>{
-                                            evt.preventDefault()
-                                            deleteReview(gearReview?.id).then(window.location.reload())}}>Delete Review</button>
-                                        :
-                                        ""
-                                    }
-                                </>
-                                
-                            }
-                            
+                                            
+//                     </>
+//                 }
+//             </section>
+//             <section class="container-fluid">
 
-                        )
-                        
-                    }
-                </section>
-    </article>
-}
-
-
-    
-                        
-
-
+//                     <div class="row">
+//                         {
+//                             gear.map(gearItem => {
+//                                 return <section key={`gear--${gearItem.id}`} class="col-md-6 col-lg-4">
+//                                     <div class="card">
                     
-            
+//                                             <a href={`gear/${gearItem.id}`} class="card-img-actions">
+//                                                 <img src={gearItem.image} class="card-img img-fluid" alt="" />
+//                                             </a>
+                                    
+//                                     </div>
+//                                     <div class="card-body">
+                                        
+//                                             <h6 class="card-title">
+//                                                 <a href={`gear/${gearItem?.id}`}>
+//                                                     {gearItem?.specifications?.manufacturer?.name} {gearItem?.name}</a>
+//                                             </h6>
+//                                             <div class="card-text">{gearItem?.specifications?.gear_types?.name}</div>
+                                        
+
+//                                             <h3 className="mb-0 font-weight-semibold">${gearItem.price}</h3>
+
+//                                             {
+//                                                 isStaff()
+//                                                 ?
+//                                                 <>
+//                                                     <button type="button" 
+//                                                         onClick={() => {
+//                                                             navigate({ pathname: `/gearUpdate/${gearItem.id}` })
+//                                                         }}
+//                                                         >Edit</button>
+//                                                     <button type="button"
+//                                                         onClick={() => { deleteGear(gearItem.id).then(window.location.reload()) }}
+//                                                         >Delete</button>
+                                                
+//                                                 </>
+//                                                 : ""
+                                                
+//                                             }
+
+
+//                                     </div>
+//                                 </section>
+//                             })
+//                         }
+//                     </div>
+//             </section>
+//         </article>
+//     )
+// }
+

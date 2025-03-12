@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 import "./Auth.css"
+import { Button } from "react-bootstrap"
 
 
 export const Login = () => {
@@ -31,12 +32,12 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
+        <main className="login--main">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
                 <div>Username or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
             </dialog>
-            <section>
+            <section className="container--login">
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1>Waver</h1>
                     <h2>Please sign in</h2>
@@ -51,12 +52,13 @@ export const Login = () => {
                     <fieldset style={{
                         textAlign: "center"
                     }}>
-                        <button type="submit">Sign In</button>
+                        <Button type="submit">{'Sign In'}</Button>
                     </fieldset>
                 </form>
             </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+
+            <section>
+                <Link className="link--register" to="/register">Not a member yet?</Link>
             </section>
         </main>
     )

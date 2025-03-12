@@ -7,51 +7,53 @@ const userId = isUser()
 
 export const NavBar = () => {
     const navigate = useNavigate()
-    return ( <>
-    
-    <ul className="navbar">
-
-        <li>
-            <h1 className="mainHeader">Waver</h1>
-        </li>
-        <li className="navbar__item">
-            <Link className="nav-link" to="/gear">Gear</Link>
-        </li>
-        <li className="navbar__item">
-            <Link className="nav-link" to="/posts">News</Link>            
-        </li>
-        <li className="navbar__item">
-            <Link className="nav-link" to="/used_gear">Used</Link> 
-        </li>
-        
-        
-        {
-            isStaff()
-            ?
-            <li className="navbar__item">
-                <Link className="nav-link" to="/users">Users</Link> 
+    return ( 
+    <>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <li class='navbar-brand'>
+                <h1 class="mainHeader">Waver</h1>
             </li>
-            : ""
-        }
-        {
-            (localStorage.getItem("lu_token") !== null) ?
-                <li className="nav-item">
-                    <button className="nav-link fakeLink"
-                        onClick={() => {
-                            localStorage.removeItem("lu_token")
-                            navigate('/login')
-                        }}
-                    >Logout</button>
-                </li> :
-                <>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <Link class="nav-link" to="/gear">Gear</Link>
+                </li>
+                <li class="nav-item active">
+                    <Link class="nav-link" to="/posts">News</Link>            
+                </li>
+                <li class="nav-item active">
+                    <Link class="nav-link" to="/used_gear">Used</Link> 
+                </li>
+                
+                
+                {
+                    isStaff()
+                    ?
+                    <li class="nav-item active">
+                        <Link class="nav-link" to="/users">Users</Link> 
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/register">Register</Link>
-                    </li>
-                </>
-        }        </ul>
+                    : ""
+                }
+                {
+                    (localStorage.getItem("lu_token") !== null) ?
+                    <li class="nav-item">
+                            <button class="nav-link fakeLink"
+                                onClick={() => {
+                                    localStorage.removeItem("lu_token")
+                                    navigate('/')
+                                }}
+                                >Logout</button>
+                        </li> :
+                        <>
+                            <li class="nav-item">
+                                <Link class="nav-link" to="/">Login</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" to="/register">Register</Link>
+                            </li>
+                        </>
+                }        
+            </ul>
+        </nav>
     </>
 )
 }

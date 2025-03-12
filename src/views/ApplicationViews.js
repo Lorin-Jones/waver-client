@@ -17,15 +17,18 @@ import { UserPage } from "../components/users/UserPage"
 import { PostEdit } from "../components/posts/PostEdit"
 import { NavBar } from "../components/nav/NavBar"
 
-
 export const ApplicationViews = () => {
     return <>
         <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route element={<Authorized />}>
+            <Route element={
+                <Authorized>
+                    <NavBar />
+                </Authorized>
+            }>
                 <Route path="/gear" element={<GearList />} />
-                <Route path="/gear/:gearId" element={ <GearDetails />} />
+                {/* <Route path="/gear/:gearId" element={ <GearDetails />} /> */}
                 <Route path="/gear/new" element={<GearForm />} />
                 <Route path="/gearUpdate/:gearId" element={<GearEdit />} />
                 <Route path="/users" element={<UserList />} />
@@ -37,17 +40,6 @@ export const ApplicationViews = () => {
                 <Route path="/posts/new" element={<PostForm />} />
                 <Route path="/users/:userId" element={<UserPage />} />
                 <Route path="/postUpdate/:postId" element={<PostEdit />} />
-
-
-
-
-
-
-
-
-
-
-                {/* Add Routes here */}
             </Route>
         </Routes>
     </>

@@ -17,14 +17,7 @@ fieldset {
     border: 0;
 }
 
-.form--login {
-    display: inline-block;
-    max-width: 80%;
-    border-radius: 10px;
-    text-align: left;
-}
-
-.form--login > fieldset > input[type="email"],
+.form--login > fieldset > input[type="username"],
 .form--login > fieldset > input[type="password"] {
     width: 25em;
 }
@@ -32,6 +25,10 @@ fieldset {
 .label--login {
     width: 8rem;
     display: inline-block;
+}
+
+.link--register {
+    color: #fafafa;
 }
 
 .form-control {
@@ -51,20 +48,30 @@ fieldset {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.container--login {
+.login--main {
+    padding-top: 48px;
     text-align: center;
 }
 
+.container--login {
+    display: flex;
+    justify-content: center;
+}
+
 .form--login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-size: cover;
     background-position-x: center;
     z-index: 1;
     min-height: 25rem;
-    min-width: 45rem;
     padding: 0 5rem;
     background-color: hsla(0,0%,100%,0.75);
     background-blend-mode: overlay;
     background-repeat: no-repeat;
+    border-radius: 10px;
+    text-align: left;
 }
 
 .button--close {
@@ -75,4 +82,17 @@ fieldset {
 .dialog {
     min-width: 15rem;
     min-height: 5rem;
+}
+
+.register--form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.registration {
+    display: flex;
+    justify-content: center;
+    padding-top: 48px;
 }

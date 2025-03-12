@@ -3,15 +3,21 @@
 import { getToken } from "../utils/getToken"
 
 
-export const getGear = () => {
-    return fetch("http://localhost:8000/gear", {
-        headers:{
+export const fetchGear = async () => {
+    const response = await fetch("http://localhost:8000/gear", {
+        headers: {
             "Content-Type": "application/json",
-            "Authorization": `Token ${getToken()}` 
+            "Authorization": `Token ${getToken()}`
         }
-    })
-        .then(response => response.json())
-}
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+};
+
 
 export const getSingleGear = (gearId) => {
     return fetch(`http://localhost:8000/gear/${gearId}`, {

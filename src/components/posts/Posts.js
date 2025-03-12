@@ -3,17 +3,18 @@ import { Link, useNavigate } from "react-router-dom"
 import { deletePost, getAllPosts } from "../../managers/PostManager.js"
 import { isStaff } from "../../utils/isStaff.js"
 import "./posts.css"
+import { usePosts } from "../../queries/posts.js"
 
 
 
 export const PostList = (props) => {
-    const [ allPosts, setAllPosts ] = useState([])
-
+    // const [ allPosts, setAllPosts ] = useState([])
     const navigate = useNavigate()
+    const { posts: allPosts, isLoading } = usePosts();
 
-    useEffect(() => {
-        getAllPosts().then(data => setAllPosts(data))
-    }, [])
+    // useEffect(() => {
+    //     getAllPosts().then(data => setAllPosts(data))
+    // }, [])
 
 
     return (
