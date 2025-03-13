@@ -38,3 +38,87 @@ img {
     margin-top: 1rem;
 }
 
+.gear {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 48px;
+    padding-right: 48px;
+}
+
+.gearHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid-item {
+    height: 550px; 
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center; 
+    box-sizing: border-box;
+    border-radius: 15px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: auto; 
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .gear-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 362px;
+    height: 100%;
+  }
+
+  .image-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 362px;
+  }
+
+  .gear-body {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    width: 100%;
+  }
+
+  .buttonGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .actionButtons {
+    width: 84px
+  }
+
+  .formStyles {
+    display: flex;
+    justify-content: center;
+  }
+
+  .gearForm {
+    width: 50%;
+    padding-top: 24px
+     
+  }
+
+  .specifications {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkBox {
+    display: flex;
+    flex-direction: row;
+  }

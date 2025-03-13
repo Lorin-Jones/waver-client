@@ -9,7 +9,7 @@ export const NavBar = () => {
     const navigate = useNavigate()
     return ( 
     <>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light px-2">
             <li class='navbar-brand'>
                 <h1 class="mainHeader">Waver</h1>
             </li>
