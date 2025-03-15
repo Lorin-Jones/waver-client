@@ -16,9 +16,7 @@
     
 }
 .post-container {
-    width: 50%;
-    height: auto;
-    margin-top: 1rem;
+    padding: 16px
 }
 img {
     width: 80%;
@@ -35,6 +33,11 @@ img {
 #postHeader {
     font-size:large;
     font-weight: bold;
+}
+
+.container {
+    background-color: #f0f0f0;
+    border-radius: 15px
 }
 
 a:link { text-decoration: none; }

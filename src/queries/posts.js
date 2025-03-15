@@ -8,13 +8,10 @@ export const usePosts = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
+            setLoading(true);
             try {
                 const response = await getAllPosts(); 
-                if (!response.ok) {
-                    throw new Error("Failed to fetch posts");
-                }
-                const data = await response.json();
-                setPosts(data);
+                setPosts(response);
             } catch (err) {
                 setError(err.message);
             } finally {

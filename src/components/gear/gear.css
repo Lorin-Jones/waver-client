@@ -105,20 +105,33 @@ img {
   .formStyles {
     display: flex;
     justify-content: center;
+    padding-top: 24px
   }
 
   .gearForm {
     width: 50%;
-    padding-top: 24px
-     
+    padding-top: 24px;
+    background-color: #f0f0f0;
+    border-radius: 15px    
   }
 
   .specifications {
     display: flex;
     flex-direction: column;
-  }
+    width: 200px;
+    padding-bottom: 16px;
+}
 
   .checkBox {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .form-group {
+    padding-bottom: 8px
+  }
+
+  .formBlock {
+    padding: 24px
   }
