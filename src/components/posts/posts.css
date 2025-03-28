@@ -10,14 +10,29 @@
 }
 
 .image-container {
-    object-fit: fill;
-    width: 50%;
-    height: auto;
-    
+    max-width: 400px;
+    max-height: 400px;
+    height: 100%;  
 }
+.form-container {
+   display: flex;
+   justify-content: center;
+   padding-top: 24px;
+}
+
 .post-container {
+    background-color: #f0f0f0;
+    border-radius: 15px;
     padding: 16px
 }
+
+.postForm {
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    padding: 16px;
+    width: 50%;
+}
+
 img {
     width: 80%;
     height: auto;
@@ -25,9 +40,9 @@ img {
     margin-right: 1rem;
     
 } 
-.row {
-    border-top: 1px solid #ccc;
-    margin-top: 0%;
+.postRow {
+    display: flex;
+    flex-direction: row;
     margin-bottom: 1rem;
 }
 #postHeader {
@@ -36,8 +51,48 @@ img {
 }
 
 .container {
-    background-color: #f0f0f0;
-    border-radius: 15px
+   padding-top: 24px;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image {
+    border-radius: 10px;
+}
+
+.news-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0%;
+    padding-left: 16px
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actionButton {
+    padding: 8px;
+    width: 88px
+}
+
+.add-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 a:link { text-decoration: none; }

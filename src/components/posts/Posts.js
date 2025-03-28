@@ -12,6 +12,7 @@ export const PostList = (props) => {
     // const [ allPosts, setAllPosts ] = useState([])
     const navigate = useNavigate()
     const { posts: allPosts } = usePosts();
+    const staff = isStaff()
 
     // useEffect(() => {
     //     getAllPosts().then(data => setAllPosts(data))
@@ -21,9 +22,10 @@ export const PostList = (props) => {
     return (
         <article className="container">
             <div className="post-container">
-                    <h2 className="header">News</h2>
+                <div className="header-container">
+                    <h2 className="news-header">News</h2>
                         {
-                            isStaff()
+                            staff
                             &&
                             <Button className="button"
                             onClick={() => {
@@ -31,39 +33,36 @@ export const PostList = (props) => {
                             }}
                             >Create Post</Button>
                         }
-
-                    
+                </div>
+                <div style={{ paddingTop: '24px'}}>
                     {
                         allPosts?.map(post => {
-                            return <section key={`post--${post.id}`} className="row">
-                                <div className="col-sm-3">
-                                        <a href={`posts/${post.id}`} className="card-img-actions">
-                                            <img src={post.image} width="96" height="350" alt="" />
-                                        </a>
-                                </div>
-                                <div className="col-6">
-                                        <a href={`posts/${post.id}`}>
-                                            <h2 id="postHeader">{post.title}</h2>
-                                        </a>
-                                        <div>By {post.user.full_name}</div>
-                                        {
-                                            isStaff()
-                                            ?
-                                            <div className="button-container">
-                                                <button className="delete" onClick={() => deletePost(post.id).then(window.location.reload())}>Delete</button> 
-                                                <button className="edit" onClick={() => {navigate({ pathname: `/postUpdate/${post.id}` })}}>Edit</button>
-                                            </div>
-
-        :
-        ""
-        }
-                                </div>
-                                
-                            </section>
-
-
-        })
-        }
+                            return <section key={`post--${post.id}`} className="postRow">
+                                        <div className="image-container">
+                                                <a href={`posts/${post.id}`}>
+                                                    <img src={post.image} alt="post" className="image"/>
+                                                </a>
+                                        </div>
+                                        <div className="content">
+                                                <div>
+                                                    <a href={`posts/${post.id}`}>
+                                                        <h2 id="postHeader">{post.title}</h2>
+                                                    </a>
+                                                    <div>By {post.user.full_name}</div>
+                                                </div>
+                                                {
+                                                    staff
+                                                    &&
+                                                    <div className="button-container">
+                                                        <Button className="actionButton" onClick={() => deletePost(post.id).then(window.location.reload())}>Delete</Button> 
+                                                        <Button className="actionButton" onClick={() => {navigate({ pathname: `/postUpdate/${post.id}` })}}>Edit</Button>
+                                                    </div>
+                                                }
+                                        </div>    
+                                    </section>
+                    })
+                }
+                </div>
             </div>
         </article>
     )

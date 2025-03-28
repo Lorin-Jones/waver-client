@@ -5,6 +5,7 @@ import { createPost } from '../../managers/PostManager.js'
 import "./posts.css"
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Button } from "react-bootstrap"
 
 
 export const PostForm = () => {
@@ -41,54 +42,56 @@ export const PostForm = () => {
     }
 
     return (
-        <form className="postForm">
-            <h2 className="postForm__title">Write a Post</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="title">Title: </label>
-                    <input type="text" name="title" required autoFocus className="form-control"
-                        value={currentPost.title}
-                        onChange={changePostState}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <img src={currentPost.image} />
-                <button
-                    onClick={(clickEvent) => showWidget(clickEvent)}
-                    className="btn btn-primary">
-                    Add Image
-                </button>
-            </fieldset>
-            
-            <fieldset>
-                <label htmlFor="content">Content </label>
-                <CKEditor
-                    editor={ ClassicEditor } 
-                    data={text}
-                    onChange={(evt, editor) => {
-                        const data = editor.getData()
-                        setText(data)
-                    }}
-                    />
-            </fieldset>
-            
-            <button type="submit"
-                onClick={evt => {
-                    // Prevent form from being submitted
-                    evt.preventDefault()
-
-                    const post = {
-                        title: currentPost.title,
-                        image: currentPost.image,
-                        content: text,
-                    }
-
-                    // Send POST request to your API
-                    createPost(post)
+        <section className="form-container">
+            <form className="postForm">
+                <h2 className="postForm__title">Write a Post</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="title">Title: </label>
+                        <input type="text" name="title" required autoFocus className="form-control"
+                            value={currentPost.title}
+                            onChange={changePostState}
+                            />
+                    </div>
+                </fieldset>
+                <fieldset className="add-image">
+                    <img src={currentPost.image} />
+                    <Button
+                        onClick={(clickEvent) => showWidget(clickEvent)}
+                        style={{width: '120px'}}>
+                        Add Image
+                    </Button>
+                </fieldset>
+                
+                <fieldset>
+                    <label htmlFor="content">Content </label>
+                    <CKEditor
+                        editor={ ClassicEditor } 
+                        data={text}
+                        onChange={(evt, editor) => {
+                            const data = editor.getData()
+                            setText(data)
+                        }}
+                        />
+                </fieldset>
+                
+                <button type="submit"
+                    onClick={evt => {
+                        // Prevent form from being submitted
+                        evt.preventDefault()
+                        
+                        const post = {
+                            title: currentPost.title,
+                            image: currentPost.image,
+                            content: text,
+                        }
+                        
+                        // Send POST request to your API
+                        createPost(post)
                         .then(() => navigate("/posts"))
-                }}
-                className="btn btn-primary">Create</button>
-        </form>
+                    }}
+                    className="btn btn-primary">Create</button>
+            </form>
+        </section>
     )
 }
