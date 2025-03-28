@@ -34,7 +34,8 @@ export const UserList = () => {
             {
                 waverUsers.map(
                     (waverUser) => {
-                        return <>
+                        return <div>
+
                         <h3>{waverUser.user.username}</h3>
                         <div>{waverUser.full_name}</div>
                         <div>{waverUser.user.email}</div>
@@ -61,7 +62,7 @@ export const UserList = () => {
                                         is_staff: false
                                     }
                                     updateUser(updatedUser, waverUser.id)
-                                        .then(() => getWaverUsers().then(data => setUsers(data)))
+                                    .then(() => getWaverUsers().then(data => setUsers(data)))
                                     
                                     
                                 }}>Remove Admin</button>
@@ -81,14 +82,14 @@ export const UserList = () => {
                                         is_staff: true
                                     }
                                     updateUser(updatedUser, waverUser.id)
-                                        .then(() => getWaverUsers().then(data => setUsers(data)))
+                                    .then(() => getWaverUsers().then(data => setUsers(data)))
                                     
                                 }}>Make Admin</button>
                             </>    
                             
-                        
+                            
                         }
-                        </>
+                        </div>
                         
                         
                     }
